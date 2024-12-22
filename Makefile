@@ -1,4 +1,4 @@
-MAIN_PACKAGE := ./cmd/api/main.go
+MAIN_PACKAGE := ./cmd/main.go
 BINARY_NAME := neoshare
 
 
@@ -10,25 +10,33 @@ BINARY_NAME := neoshare
 .PHONY: build
 build:
 	@echo "Building binary..."
+	@make build-frontend
 	@CGO_ENABLED=0 go build -o bin/${BINARY_NAME} ${MAIN_PACKAGE}
 
 ## dev: Run the code development environment
 .PHONY: dev
 dev:
 	@echo "Running development environment..."
-	@go run ${MAIN_PACKAGE}
+	@make build-frontend
+	@go run ${MAIN_PACKAGE} serve
+
+## build-frontend: Build the frontend application
+.PHONY: build-frontend
+build-frontend:
+	@echo "Building frontend..."
+	@cd ui && pnpm build
 
 ## watch: Run the application with reloading on file changes
 .PHONY: watch
 watch:
 	@if command -v air > /dev/null; then \
-	    air; \
+	    air serve; \
 	    echo "Watching...";\
 	else \
 	    read -p "Go's 'air' is not installed on your machine. Do you want to install it? [Y/n] " choice; \
 	    if [ "$$choice" != "n" ] && [ "$$choice" != "N" ]; then \
 	        go install github.com/air-verse/air@latest; \
-	        air; \
+	        air serve; \
 	        echo "Watching...";\
 	    else \
 	        echo "You chose not to install air. Exiting..."; \
