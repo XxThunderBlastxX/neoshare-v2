@@ -24,7 +24,7 @@ func main() {
 				}
 
 				return e.Next()
-			}).Bind(apis.Gzip())
+			})
 
 		return se.Next()
 	})
