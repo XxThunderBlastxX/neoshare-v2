@@ -6,7 +6,7 @@ export class PocketBaseInstance {
 
     public static get instance() : Client {
         if (!PocketBaseInstance._instance) {
-            PocketBaseInstance._instance = new PocketBase('http://localhost:8090');
+            PocketBaseInstance._instance = new PocketBase("/");
         }
         return PocketBaseInstance._instance;
     }

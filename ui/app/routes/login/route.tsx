@@ -11,6 +11,7 @@ export async function clientAction({ request }: ActionFunctionArgs) {
     collection('users').
     authWithPassword(email, password);
     if (user) {
+        PocketBaseInstance.instance.authStore.save(user.token, user.record);
         throw redirect('/');
     }
 
