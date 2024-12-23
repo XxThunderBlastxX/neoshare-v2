@@ -1,13 +1,8 @@
-import { cn } from "~/lib/utils"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card"
-import { Input } from "~/components/ui/input"
-import { Label } from "~/components/ui/label"
+import {cn} from "~/lib/utils"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "~/components/ui/card"
+import {Input} from "~/components/ui/input"
+import {Label} from "~/components/ui/label"
+import {Form} from "@remix-run/react";
 
 export function LoginForm({
   className,
@@ -23,12 +18,13 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <Form method={"post"}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  name={"email"}
                   type="email"
                   placeholder="me@example.com"
                   required
@@ -46,6 +42,7 @@ export function LoginForm({
                 </div>
                 <Input
                     id="password"
+                    name={"password"}
                     type="password"
                     placeholder={"**********"}
                     required
@@ -55,7 +52,7 @@ export function LoginForm({
                 Login
               </button>
             </div>
-          </form>
+          </Form>
         </CardContent>
       </Card>
     </div>
