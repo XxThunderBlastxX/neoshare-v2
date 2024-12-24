@@ -1,5 +1,5 @@
 import {LoginForm} from "~/components/login-form";
-import {ActionFunctionArgs, json, redirect} from "@remix-run/node";
+import {ActionFunctionArgs} from "@remix-run/node";
 import {PocketBaseInstance} from "~/service/pocketbase";
 
 export async function clientAction({ request }: ActionFunctionArgs) {
@@ -12,10 +12,10 @@ export async function clientAction({ request }: ActionFunctionArgs) {
     authWithPassword(email, password);
     if (user) {
         PocketBaseInstance.instance.authStore.save(user.token, user.record);
-        throw redirect('/');
+        window.location.replace("/upload");
     }
 
-    return json({formError: 'Invalid username or password'})
+    return null
 }
 
 export default function Layout() {

@@ -1,13 +1,9 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
+import {Links, Meta, Outlet, Scripts, ScrollRestoration,} from "@remix-run/react";
+import type {LinksFunction} from "@remix-run/node";
+import React from "react";
 
 import "./tailwind.css";
+import Header from "~/components/header";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -32,6 +28,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body data-theme={"night"}>
+        <Header/>
         {children}
         <ScrollRestoration />
         <Scripts />

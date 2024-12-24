@@ -1,7 +1,6 @@
-import type {MetaFunction} from "@remix-run/node";
-import AuthScreen from "~/routes/_index/auth";
+import {MetaFunction} from "@remix-run/node";
 import {PocketBaseInstance} from "~/service/pocketbase";
-import UploadScreen from "~/routes/_index/upload";
+import AuthScreen from "./auth";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,5 +10,5 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  return PocketBaseInstance.instance.authStore.isValid ?  <UploadScreen/> : <AuthScreen/>;
+  return PocketBaseInstance.instance.authStore.isValid ? window.location.assign("/upload") : <AuthScreen/>;
 }
